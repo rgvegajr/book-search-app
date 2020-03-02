@@ -1,7 +1,7 @@
 {
-  "name": "mern",
+  "name": "book-search-app",
   "version": "1.0.0",
-  "description": "Mern Demo",
+  "description": "Book Search App",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "express": "^4.16.3",
-    "if-env": "^1.0.4"
+    "if-env": "^1.0.4",
+    "mongoose": "^5.9.2"
   }
 }
