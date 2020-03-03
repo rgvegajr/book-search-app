@@ -3,7 +3,7 @@ import Nav from "./components/Nav";
 import Banner from "./components/Banner";
 import Results from "./components/Results";
 import Search from "./components/Search";
-
+// import Card from "./components/Card";
 
 import "./App.css";
 
