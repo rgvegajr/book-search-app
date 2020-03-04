@@ -1,23 +1,26 @@
 import React, { Component } from "react";
-import Nav from "./components/Nav";
-import Banner from "./components/Banner";
-import Results from "./components/Results";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Common from "./components/Common";
 import Search from "./components/Search";
-// import Card from "./components/Card";
-
+import Display from "./components/Display";
+import Booklist from "./components/Booklist"
 import "./App.css";
 
-class App extends Component {
-  render() {
+const App = () => {
     return (
-      <div>
-      <Nav />
-      <Banner />
-      <Search />
-      <Results />
+      <Router>
+      <div className="App">
+        <Common />
+        <Booklist />
+        <Switch>
+          <Route exact path="/" component={Display} />
+          <Route exact path="/books" component={Display} />
+          <Route exact path="/books/:id" component={Display} />
+        </Switch>
       </div>
+      </Router>
     );
-  }
 }
+
 
 export default App;
