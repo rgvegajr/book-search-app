@@ -11,12 +11,13 @@ const App = () => {
       <Router>
       <div className="App">
         <Common />
+        <Search />
         <Booklist />
-        <Switch>
+        {/* <Switch>
           <Route exact path="/" component={Display} />
           <Route exact path="/books" component={Display} />
           <Route exact path="/books/:id" component={Display} />
-        </Switch>
+        </Switch> */}
       </div>
       </Router>
     );

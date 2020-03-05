@@ -22,3 +22,67 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+
+.list-overflow-container {
+  max-height: 545px;
+  border: 1px #DDDDDD solid;
+  border-radius: 4px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.list-overflow-container ul {
+  margin: 0;
+}
+
+.list-overflow-container li {
+  border-radius: 0px;
+  border-left: none;
+  border-right: none;
+}
+
+.list-overflow-container li * {
+  cursor: pointer;
+}
+
+.list-overflow-container li a {
+  color: #2A878C;
+}
+
+.list-overflow-container li:first-child {
+  border-top: none;
+}
+
+.list-overflow-container li:last-child {
+  border-bottom: none;
+}
+
+hr {
+  width: 100%;
+}
+
+.container {
+  margin-top: auto;
+
+}
+.delete-btn {
+  float: right;
+  color: #e74944;
+}
+
+.bg-primary {
+  background-color: skyblue;
+}
+
+form {
+  text-align: left;
+  margin-top: 1%;
+  margin-left: 3%;
+  margin-right:3%;
+}
+
+.jumbotron {
+  margin-bottom: 0;
+  padding: 3%;
+}
