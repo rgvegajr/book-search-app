@@ -1,9 +1,10 @@
-import React, { Component } from "react";
+// import React, { Component } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Common from "./components/Common";
 import Search from "./components/Search";
 import Display from "./components/Display";
-import Booklist from "./components/Booklist"
+import Booklist from "./components/Booklist";
 import "./App.css";
 
 const App = () => {
@@ -13,11 +14,11 @@ const App = () => {
         <Common />
         <Search />
         <Booklist />
-        {/* <Switch>
+        <Switch>
           <Route exact path="/" component={Display} />
           <Route exact path="/books" component={Display} />
           <Route exact path="/books/:id" component={Display} />
-        </Switch> */}
+        </Switch>
       </div>
       </Router>
     );

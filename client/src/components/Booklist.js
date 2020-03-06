@@ -6,52 +6,63 @@ export default class Booklist extends React.Component {
     state = {
         books: [],
         title: "",
-        author: "",
-        synopsis: ""
+        authors: "",
+        description: ""
     };
 
 componentDidMount() {
-    axios.get("https://www.googleapis.com/books/v1/volumes?q=thedeadzone&projection=lite&maxResults=1&key=AIzaSyAJUrUxv0dPT9IcdDnohKIyOsUie15orHc")
-    .then(res => {
-        console.log(res.data);
-        const books = res.data;
-        this.setState({ books });
-    })
+    this.loadBooks();
 };
 
 loadBooks = () => {
-    API.getBooks()
-    .then(res => this.setState({ books: res.data }))
+    axios.get("https://www.googleapis.com/books/v1/volumes?q=thedeadzone&projection=lite&maxResults=1&key=AIzaSyAJUrUxv0dPT9IcdDnohKIyOsUie15orHc")
+    // API.getBooks()
+    .then(res => {
+      console.log(res.data);
+      this.setState({ books: res.data, title: "", authors: "", description: "" });
+    }
+      )
     .catch(err => console.log(err));
 };
 
+deleteBook = id => {
+    API.deleteBook(id)
+      .then(res => this.loadBooks())
+      .catch(err => console.log(err));
+  };
 
 handleInputChange = event => {
     const { name, value} = event.target;
     this.setState({
         [name]: value
-    })
+    });
 };
 
 handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.title) {
-        API.saveBook({
-            title:  this.state.title,
+    API.searchBooks({
+      title: this.state.title
+    })
+    .then(res => this.loadBooks())
+    .catch(err => console.log(err));
+    };
 
-        })
-        .then(res => this.loadBooks())
-        .catch(err => console.log(err));
-
-    }
-};
+    // if (this.state.title) {
+    //     API.saveBook({
+    //         title:  this.state.title,
+    //         authors: this.state.authors,
+    //         description: this.state.description
+    //     })
+    //     .then(res => this.loadBooks())
+    //     .catch(err => console.log(err));
+    // }
+// };
 
 render() {
     return (
         <React.Fragment>
                     <hr></hr>
           <div className="container">
-
         <h4>Search/saved Books will show up here</h4> 
         <div className="row mb-2">
         <div className="col-md-12">
@@ -70,11 +81,9 @@ render() {
         </div>
       </div>
       </div>
-            {/* { this.state.books.map(book => <li>{book.title}</li>)} */}
         </React.Fragment>
 
     )
 }
-
 
 }
