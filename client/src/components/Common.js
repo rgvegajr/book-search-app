@@ -1,11 +1,13 @@
-import React from "react";
+import React, {Component} from "react";
+import {Link} from "react-router-dom";
 
 
-const Common = (props) => {
+export default class Common extends Component {
+  render() {
     return (
       <React.Fragment>
 <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a className="navbar-brand" href="#">Google Books!</a>
+  <Link to="/" className="navbar-brand" >Google Books!</Link>
   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon"></span>
   </button>
@@ -13,10 +15,10 @@ const Common = (props) => {
   <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
       <li className="nav-item active">
-        <a className="nav-link" href="#">Search<span class="sr-only">(current)</span></a>
+        <Link to="/books" className="nav-link" >Search<span className="sr-only">(current)</span></Link>
       </li>
       <li className="nav-item">
-        <a className="nav-link" href="#">Saved</a>
+        <Link to="/books/:id" className="nav-link" >Saved</Link>
       </li>
     </ul>
 
@@ -31,5 +33,4 @@ const Common = (props) => {
 </React.Fragment>
     )
 }
-
-export default Common;
+}

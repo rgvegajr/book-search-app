@@ -1,7 +1,10 @@
-import React from "react";
+import React, {Component} from "react";
+// import {Link} from "react-router-dom";
 
-const Display = (props) => {
-    return <div className="display">DISPLAY COMPONENT {props.children}</div>;
+export default class Display extends Component {
+    render() {
+
+    
+    return <div className="display">DISPLAY COMPONENT</div>;
 }
-
-export default Display;
+}

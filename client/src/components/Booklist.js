@@ -1,25 +1,109 @@
-import React from "react";
+import React, {Component} from "react";
+// import {Link} from "react-router-dom";
 import axios from "axios";
 import API from "../utils/API";
+// let title;
+// let authors;
+// let description;
+// let book = [];
 
-export default class Booklist extends React.Component {
-    state = {
-        books: [],
-        title: "",
-        authors: "",
-        description: ""
-    };
+export default class Booklist extends Component {
+
+  constructor(props){
+    super(props);
+    this.onChangeBooks = this.onChangeBooks.bind(this);
+    this.onChangeTitle = this.onChangeTitle.bind(this);
+    this.onChangeAuthors = this.onChangeAuthors.bind(this);
+    this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.state = {
+      books: [],
+title: "",
+authors: [""],
+description: ""
+
+    }
+  }
+ 
+onChangeBooks(e) {
+  this.setState({
+    books: e.target.value
+  });
+}
+
+onChangeTitle(e) {
+  this.setState({
+    title: e.target.value
+  });
+}
+
+onChangeAuthors(e) {
+  this.setState({
+    authors: e.target.value
+  });
+}
+
+onChangeDescription(e) {
+  this.setState({
+    description: e.target.value
+  });
+}
+
+//always user this.setState({ property: value}) instead of var assignment
+
+// state = {
+//       books: []
+//         // books: [],
+//         // title: "",
+//         // authors: "",
+//         // description: ""
+//     };
+  
 
 componentDidMount() {
-    this.loadBooks();
+  axios.get("https://www.googleapis.com/books/v1/volumes?q=thedeadzone&projection=lite&maxResults=1&key=AIzaSyAJUrUxv0dPT9IcdDnohKIyOsUie15orHc")
+  // API.getBooks()
+  .then(res => {
+    this.setState({books: [res.data]});
+    console.log("compdidmount");
+    // let books = res.data;
+    console.log(res); //object
+    // console.log(books.data);
+    console.log(this.state.books);  //array
+    // console.log(books.items[0].volumeInfo);
+    // console.log(this.state.books.items[0].volumeInfo);
+
+    console.log("title: ");
+    // console.log(books.items[0].volumeInfo.title);
+    // console.log(this.state.books.items[0].volumeInfo.title);
+    console.log("authors: ");
+    // console.log(books.items[0].volumeInfo.authors);
+    // console.log(this.state.books.items[0].volumeInfo.authors);
+    console.log("description: ");
+    // console.log(books.items[0].volumeInfo.description);
+    // console.log(this.state.books.items[0].volumeInfo.description);
+    // book.title = books.items[0].volumeInfo.title
+    // book.authors = books.items[0].volumeInfo.authors
+    // book.description =  books.items[0].volumeInfo.description;
+
+
+    // this.setState({ books: res.data });
+
+    // this.setState({ books: res.data, title: "", authors: "", description: "" });
+  }
+    )
+  .catch(err => console.log(err));
+  // return book;
 };
 
 loadBooks = () => {
     axios.get("https://www.googleapis.com/books/v1/volumes?q=thedeadzone&projection=lite&maxResults=1&key=AIzaSyAJUrUxv0dPT9IcdDnohKIyOsUie15orHc")
     // API.getBooks()
     .then(res => {
+      console.log(res);
       console.log(res.data);
-      this.setState({ books: res.data, title: "", authors: "", description: "" });
+      this.setState({ books: res.data });
+
+      // this.setState({ books: res.data, title: "", authors: "", description: "" });
     }
       )
     .catch(err => console.log(err));
@@ -45,7 +129,9 @@ handleFormSubmit = event => {
     })
     .then(res => this.loadBooks())
     .catch(err => console.log(err));
-    };
+
+    window.location = "/"; //back to home page
+};
 
     // if (this.state.title) {
     //     API.saveBook({
@@ -59,31 +145,24 @@ handleFormSubmit = event => {
 // };
 
 render() {
+console.log("prior to render");
     return (
-        <React.Fragment>
-                    <hr></hr>
-          <div className="container">
-        <h4>Search/saved Books will show up here</h4> 
-        <div className="row mb-2">
-        <div className="col-md-12">
-          <div className="card flex-md-row mb-4 box-shadow h-md-250">
-            <div className="card-body d-flex flex-column align-items-start">
-              <strong className="d-inline-block mb-2 text-primary">Title</strong>
-              <h3 className="mb-0">
-                <a className="text-dark" href="#">Featured post</a>
-              </h3>
-              <div className="mb-1 text-muted">Nov 12</div>
-              <p className="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-              <a href="#">View</a>
-            </div>
-            <img className="card-img-right flex-auto d-none d-md-block" data-src="" alt=""  src="" ></img>
-          </div>
-        </div>
+      <ul style={{"listStyleType": "none"}}>
+        <li>SEE BELOW</li>
+        {/* <li>{this.state.books}</li> */}
+        <li>{this.state.books.title }</li>
+      {this.state.books.map(book => (
+      <div>
+      <p key={book._id}>{book.id}</p>
+      <p key={book.title}>{book.title}</p>
+      <p key={book.authors}>{book.authors}</p>
+      <p key={book.description}>{book.description}</p>
       </div>
-      </div>
-        </React.Fragment>
+      ))}
+              <li>SEE ABOVE</li>
+    </ul>
 
-    )
+    );
 }
 
 }

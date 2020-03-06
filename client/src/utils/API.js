@@ -1,12 +1,12 @@
 import axios from "axios";
+import Booklist from "../components/Booklist";
 
-//https://www.googleapis.com/books/v1/volumes?q=thedeadzone&projection=lite&key=AIzaSyAJUrUxv0dPT9IcdDnohKIyOsUie15orHc
 
 export default {
   // Gets all books
-  searchBooks: function() {
-    // let query = "https://www.googleapis.com/books/v1/volumes?q=thedeadzone&projection=lite&key=AIzaSyAJUrUxv0dPT9IcdDnohKIyOsUie15orHc";
-    return axios.get("/api/books");
+  searchBooks: function(props) {
+    let query = "https://www.googleapis.com/books/v1/volumes?q=" + props.title + "&projection=lite&key=AIzaSyAJUrUxv0dPT9IcdDnohKIyOsUie15orHc";
+    return axios.get(query);
   },
   // Gets the book with the given id
   // getBook: function(id) {
