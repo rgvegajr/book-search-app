@@ -49,17 +49,6 @@ onChangeDescription(e) {
   });
 }
 
-//always user this.setState({ property: value}) instead of var assignment
-
-// state = {
-//       books: []
-//         // books: [],
-//         // title: "",
-//         // authors: "",
-//         // description: ""
-//     };
-  
-
 componentDidMount() {
   this.getBooks();
 }
@@ -123,24 +112,25 @@ handleInputChange = event => {
 
 handleFormSubmit = event => {
     event.preventDefault();
+    if (this.state.title && this.state.author) {
     API.searchBooks({
       title: this.state.title
     })
     .then(res => this.loadBooks())
     .catch(err => console.log(err));
-
-    window.location = "/"; //back to home page
+  }
+    window.location = "/books"; //back to home page
 };
 
 render() {
 console.log("prior to render");
     return (
-      <ul style={{"listStyleType": "none"}}>
-        <li>SEE BELOW</li>
+      <div className="container-fluid">  
+      {/* <div className="container" style={{"border": "2px"}}> */}
         {/* <li>{this.state.books}</li> */}
-        <li>{this.state.title }</li>
-        <li>{this.state.author }</li>
-        <li>{this.state.description }</li>
+        <p>Title:  {this.state.title }</p>
+        <p>Author(s): {this.state.authors }</p>
+        <p>Synopsis: {this.state.description }</p>
       {this.state.books.map(book => (
       <div key={book._id}>
       <p>{book.title}</p>
@@ -148,8 +138,7 @@ console.log("prior to render");
       <p key={book.description}>{book.description}</p> */}
       </div>
       ))}
-              <li>SEE ABOVE</li>
-    </ul>
+    </div>
 
     );
 }

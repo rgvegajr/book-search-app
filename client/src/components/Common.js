@@ -7,7 +7,7 @@ export default class Common extends Component {
     return (
       <React.Fragment>
 <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-  <Link to="/" className="navbar-brand" >Google Books!</Link>
+  <Link to="/books" className="navbar-brand" >Google Books!</Link>
   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon"></span>
   </button>
@@ -25,10 +25,10 @@ export default class Common extends Component {
   </div>
 </nav>
 <div className="jumbotron jumbotron-fluid">
-  <div className="container">
+  {/* <div className="container"> */}
     <h1 className="display-4">(React) Google Books Search</h1>
     <p className="lead">Search for and Save Books of Interest</p>
-  </div>
+  {/* </div> */}
 </div>
 </React.Fragment>
     )

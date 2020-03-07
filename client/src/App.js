@@ -3,8 +3,8 @@ import React, { Component} from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Common from "./components/Common";
 import Search from "./components/Search";
-// import Display from "./components/Display";
-import Booklist from "./components/Booklist";
+import Display from "./components/Display";
+// import Booklist from "./components/Booklist";
 import "./App.css";
 
 class App extends Component {
@@ -12,16 +12,18 @@ class App extends Component {
       return (
       <Router>
       {/* <div className="App"> */}
-      <div className="container">
+      {/* <div className="container"> */}
+
+      <div>
 
         <Common />
         {/* <Search /> */}
         <Switch>
           {/* <Route path="/" exact component={Common} /> */}
           <Route path="/books" exact  component={Search} />
-          {/* <Route path="/books/:id" exact path="/books/:id" component={View} /> */}
+          <Route path="/books/:id" exact path="/books/:id" component={Display} />
         </Switch>
-        <Booklist />
+        {/* <Booklist /> */}
       </div>
       </Router>
     );

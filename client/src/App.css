@@ -62,8 +62,12 @@ hr {
   width: 100%;
 }
 
-.container {
-  margin-top: auto;
+.container-fluid {
+  /* margin-top: auto; */
+  /* margin: auto; */
+  margin: 0;
+  border:2px solid #cecece;
+  padding: 2%;
 
 }
 .delete-btn {
@@ -85,4 +89,6 @@ form {
 .jumbotron {
   margin-bottom: 0;
   padding: 3%;
+  text-align: center;
 }
+
