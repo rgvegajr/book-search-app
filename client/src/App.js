@@ -3,7 +3,7 @@ import React, { Component} from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Common from "./components/Common";
 import Search from "./components/Search";
-import Display from "./components/Display";
+// import Display from "./components/Display";
 import Booklist from "./components/Booklist";
 import "./App.css";
 

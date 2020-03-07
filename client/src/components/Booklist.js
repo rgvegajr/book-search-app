@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+// import ReactDOM from "react-dom";
 // import {Link} from "react-router-dom";
 import axios from "axios";
 import API from "../utils/API";
@@ -60,40 +61,38 @@ onChangeDescription(e) {
   
 
 componentDidMount() {
+  this.getBooks();
+}
+
+getBooks = () => {
   axios.get("https://www.googleapis.com/books/v1/volumes?q=thedeadzone&projection=lite&maxResults=1&key=AIzaSyAJUrUxv0dPT9IcdDnohKIyOsUie15orHc")
   // API.getBooks()
   .then(res => {
-    this.setState({books: [res.data]});
+    this.setState({
+      books: [res.data], 
+      title: res.data.items[0].volumeInfo.title, 
+      authors: [res.data.items[0].volumeInfo.authors], 
+      description: res.data.items[0].volumeInfo.description});
     console.log("compdidmount");
-    // let books = res.data;
     console.log(res); //object
-    // console.log(books.data);
     console.log(this.state.books);  //array
-    // console.log(books.items[0].volumeInfo);
-    // console.log(this.state.books.items[0].volumeInfo);
-
     console.log("title: ");
-    // console.log(books.items[0].volumeInfo.title);
-    // console.log(this.state.books.items[0].volumeInfo.title);
+    console.log(this.state.title);
+
+    // console.log(this.state.books[0].items[0].volumeInfo.title);
     console.log("authors: ");
-    // console.log(books.items[0].volumeInfo.authors);
-    // console.log(this.state.books.items[0].volumeInfo.authors);
+    console.log(this.state.authors);
+    // console.log(this.state.books[0].items[0].volumeInfo.authors);
     console.log("description: ");
-    // console.log(books.items[0].volumeInfo.description);
-    // console.log(this.state.books.items[0].volumeInfo.description);
-    // book.title = books.items[0].volumeInfo.title
-    // book.authors = books.items[0].volumeInfo.authors
-    // book.description =  books.items[0].volumeInfo.description;
+    console.log(this.state.description);
 
-
-    // this.setState({ books: res.data });
-
-    // this.setState({ books: res.data, title: "", authors: "", description: "" });
+    // console.log(this.state.books[0].items[0].volumeInfo.description);
   }
     )
   .catch(err => console.log(err));
   // return book;
 };
+
 
 loadBooks = () => {
     axios.get("https://www.googleapis.com/books/v1/volumes?q=thedeadzone&projection=lite&maxResults=1&key=AIzaSyAJUrUxv0dPT9IcdDnohKIyOsUie15orHc")
@@ -133,30 +132,20 @@ handleFormSubmit = event => {
     window.location = "/"; //back to home page
 };
 
-    // if (this.state.title) {
-    //     API.saveBook({
-    //         title:  this.state.title,
-    //         authors: this.state.authors,
-    //         description: this.state.description
-    //     })
-    //     .then(res => this.loadBooks())
-    //     .catch(err => console.log(err));
-    // }
-// };
-
 render() {
 console.log("prior to render");
     return (
       <ul style={{"listStyleType": "none"}}>
         <li>SEE BELOW</li>
         {/* <li>{this.state.books}</li> */}
-        <li>{this.state.books.title }</li>
+        <li>{this.state.title }</li>
+        <li>{this.state.author }</li>
+        <li>{this.state.description }</li>
       {this.state.books.map(book => (
-      <div>
-      <p key={book._id}>{book.id}</p>
-      <p key={book.title}>{book.title}</p>
-      <p key={book.authors}>{book.authors}</p>
-      <p key={book.description}>{book.description}</p>
+      <div key={book._id}>
+      <p>{book.title}</p>
+      {/* <p key={book.authors}>{book.authors}</p>
+      <p key={book.description}>{book.description}</p> */}
       </div>
       ))}
               <li>SEE ABOVE</li>
