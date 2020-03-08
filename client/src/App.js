@@ -6,24 +6,20 @@ import Search from "./components/Search";
 import Display from "./components/Display";
 // import Booklist from "./components/Booklist";
 import "./App.css";
+import Booklist from "./components/Booklist";
 
 class App extends Component {
     render() {
       return (
       <Router>
-      {/* <div className="App"> */}
-      {/* <div className="container"> */}
-
       <div>
-
-        <Common />
-        {/* <Search /> */}
-        <Switch>
-          {/* <Route path="/" exact component={Common} /> */}
-          <Route path="/books" exact  component={Search} />
-          <Route path="/books/:id" exact path="/books/:id" component={Display} />
-        </Switch>
-        {/* <Booklist /> */}
+      <Common />
+      <Switch>
+          <Route exact path="/" component={Display} />
+          <Route exact path="/search"  component={Search} />
+          <Route path="/saved"  component={Display} />
+      </Switch>
+      {/* <Booklist /> */}
       </div>
       </Router>
     );

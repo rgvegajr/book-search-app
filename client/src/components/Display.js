@@ -3,6 +3,8 @@ import axios from "axios";
 // import {Link} from "react-router-dom";
 import API from "../utils/API";
 import Booklist from "../components/Booklist";
+// import Common from "./components/Common";
+
 
 export default class Display extends Component {
     constructor(props){
@@ -15,8 +17,9 @@ export default class Display extends Component {
           books: [],
     title: "",
     authors: [""],
-    description: ""
-    
+    description: "",
+    image: "",
+    link: ""
         }
       }
 
@@ -32,7 +35,10 @@ export default class Display extends Component {
             books: [res.data], 
             title: res.data.items[0].volumeInfo.title, 
             authors: [res.data.items[0].volumeInfo.authors], 
-            description: res.data.items[0].volumeInfo.description});
+            description: res.data.items[0].volumeInfo.description,
+            image: res.data.items[0].volumeInfo.imageLinks.thumbnail,
+            link: res.data.items[0].volumeInfo.infoLink
+          });
           console.log("compdidmount");
           console.log(res); //object
           console.log(this.state.books);  //array
@@ -48,25 +54,8 @@ export default class Display extends Component {
       };
 
 
-    // loadBooks = () => {
-    //     axios.get("https://www.googleapis.com/books/v1/volumes?q=thedeadzone&projection=lite&maxResults=1&key=AIzaSyAJUrUxv0dPT9IcdDnohKIyOsUie15orHc")
-    //     // API.getBooks()
-    //     .then(res => {
-    //       console.log(res);
-    //       console.log(res.data);
-    //       this.setState({ books: res.data });
-    
-    //       // this.setState({ books: res.data, title: "", authors: "", description: "" });
-    //     }
-    //       )
-    //     .catch(err => console.log(err));
-    // };
-
-
-
     render() {
-
-    return (
+    return (      
       <Booklist />
       //   <ul style={{"listStyleType": "none"}}>
       //     <li>SEE BELOW</li>

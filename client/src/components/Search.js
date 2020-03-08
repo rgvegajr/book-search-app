@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import Booklist from "../components/Booklist";
+// import Common from "./components/Common";
+
 
 // import {Link} from "react-router-dom";
 import API from "../utils/API";
@@ -10,6 +12,7 @@ constructor(props){
     super(props);
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.state = {
       books: [],
 title: "",
@@ -18,13 +21,21 @@ description: ""
     }
 }
 
+handleInputChange = event => {
+  const { name, value} = event.target;
+  this.setState({
+      [name]: value
+  });
+};
+
 handleFormSubmit = event => {
     event.preventDefault();
+    if (this.state.title) {
     API.searchBooks({
       title: this.state.title
     })
     .then(res => {
-      alert("searchbook response");
+      console.log("searchbook response");
       console.log(res.data);
       this.setState({
         books: [res.data], 
@@ -35,7 +46,8 @@ handleFormSubmit = event => {
       this.loadBooks()})
     .catch(err => console.log(err));
 
-    window.location = "/books"; //back to home page
+    window.location = "/search";
+  } //back to home page
 };
 
 onChangeTitle(e) {
@@ -45,6 +57,7 @@ onChangeTitle(e) {
 }
 
 render() {
+
     return (
         <React.Fragment>
           <div className="container-fluid">
@@ -52,9 +65,22 @@ render() {
     <h4>Book Search</h4>
   <div className="form-group">
     <label>Book</label>
-    <input type="text" className="form-control" id="searchBook" value="" onChange={this.onChangeTitle} aria-describedby="" placeholder="Enter book name i.e. Harry Potter"></input>
+    <input 
+    type="text" 
+    className="form-control" 
+    name="title"
+    value={this.state.title} 
+    onChange={this.handleInputChange} 
+    aria-describedby="" 
+    placeholder="Enter book name i.e. Harry Potter">
+    </input>
   </div>
-  <button type="submit" className="btn btn-primary">Search</button>
+  <button 
+  type="submit" 
+  className="btn btn-primary"
+  onClick={this.handleFormSubmit}
+  >Search{this.props.title}
+  </button>
 </form>
 </div>
 <Booklist />
