@@ -1,5 +1,5 @@
 import axios from "axios";
-import Booklist from "../components/Booklist";
+// import Booklist from "../components/Booklist";
 
 export default {
   // Gets all books
@@ -10,7 +10,7 @@ export default {
     console.log(props.title);
     let query = "https://www.googleapis.com/books/v1/volumes?q=" + props.title + "&projection=lite&key=AIzaSyAJUrUxv0dPT9IcdDnohKIyOsUie15orHc";
   //  return axios.get(query);
-   return axios.get("/api/search");
+   return axios.get(query);
 
 //     .then(res => {
 //       console.log("searchBooks function responses");

@@ -1,13 +1,10 @@
 import React, {Component} from "react";
-import Booklist from "../components/Booklist";
-// import Common from "./components/Common";
-
-
-// import {Link} from "react-router-dom";
+// import ReactDOM from "react-dom";
+import {Link} from "react-router-dom";
+import axios from "axios";
 import API from "../utils/API";
 
 export default class Search extends Component {
-
 constructor(props){
     super(props);
     this.onChangeTitle = this.onChangeTitle.bind(this);
@@ -17,8 +14,14 @@ constructor(props){
       books: [],
 title: "",
 authors: [""],
-description: ""
+description: "",
+image: "",
+link: ""
     }
+}
+
+componentDidMount() {
+  // this.getBooks();
 }
 
 handleInputChange = event => {
@@ -36,17 +39,27 @@ handleFormSubmit = event => {
     })
     .then(res => {
       console.log("searchbook response");
+      console.log(res);
       console.log(res.data);
       this.setState({
         books: [res.data], 
         title: res.data.items[0].volumeInfo.title, 
         authors: [res.data.items[0].volumeInfo.authors], 
-        description: res.data.items[0].volumeInfo.description
+        description: res.data.items[0].volumeInfo.description,
+        image: res.data.items[0].volumeInfo.imageLinks.thumbnail,
+        link: res.data.items[0].volumeInfo.infoLink
       });
-      this.loadBooks()})
+      console.log("searchBooks results");
+      console.log("=============================");
+      console.log("title: ");
+      console.log(this.state.title);
+      console.log("authors: ");
+      console.log(this.state.authors);
+      console.log("description: ");
+      console.log(this.state.description);
+    // window.location = "/search";
+     } )
     .catch(err => console.log(err));
-
-    window.location = "/search";
   } //back to home page
 };
 
@@ -56,16 +69,36 @@ onChangeTitle(e) {
   });
 }
 
+deleteBook = id => {
+  API.deleteBook(this.state.id)
+    .then(res => this.loadBooks())
+    .catch(err => console.log(err));
+};
+
+saveBook = id => {
+API.saveBook(id)
+.then(res => this.getBooks())
+.catch(err =>console.log(err));
+}
+
+handleSearch = () => {
+  window.location = this.state.link;
+}
+
+viewBook = id => {
+
+}
+
 render() {
 
     return (
         <React.Fragment>
-          <div className="container-fluid">
-<form onSubmit={this.handleFormSubmit}>
-    <h4>Book Search</h4>
-  <div className="form-group">
-    <label>Book</label>
-    <input 
+    <div className="container-fluid">
+      <form onSubmit={this.handleFormSubmit}>
+      <h4>Book Search</h4>
+      <div className="form-group">
+        <label>Book</label>
+        <input 
     type="text" 
     className="form-control" 
     name="title"
@@ -73,7 +106,7 @@ render() {
     onChange={this.handleInputChange} 
     aria-describedby="" 
     placeholder="Enter book name i.e. Harry Potter">
-    </input>
+        </input>
   </div>
   <button 
   type="submit" 
@@ -81,10 +114,24 @@ render() {
   onClick={this.handleFormSubmit}
   >Search{this.props.title}
   </button>
-</form>
-</div>
-<Booklist />
+  </form>
+  </div>
+  <h4>Results</h4>
+      <div className="container-fluid">  
+        <p>Title:  {this.state.title }</p>
+        <p>Author(s): {this.state.authors }</p>
+        <p>Synopsis: {this.state.description }</p>
+        <p> 
+           <img alt="book image" src={this.state.image}></img>
+        </p>
+      <p>
+      <button  className="btn btn-lg btn-success float-right" onClick={this.saveBook}>Save</button> 
+      <button onClick={this.handleSearch} className="btn btn-lg btn-info float-right">
+          View
+      </button>
+      </p>
+    </div>
         </React.Fragment>
-    )
+    );
 }
 }

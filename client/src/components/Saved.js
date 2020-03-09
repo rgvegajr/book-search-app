@@ -2,11 +2,11 @@ import React, {Component} from "react";
 import axios from "axios";
 // import {Link} from "react-router-dom";
 import API from "../utils/API";
-import Booklist from "../components/Booklist";
+// import Booklist from "../components/Booklist";
 // import Common from "./components/Common";
 
 
-export default class Display extends Component {
+export default class Saved extends Component {
     constructor(props){
         super(props);
         // this.onChangeBooks = this.onChangeBooks.bind(this);
@@ -56,23 +56,23 @@ export default class Display extends Component {
 
     render() {
     return (      
-      <Booklist />
-      //   <ul style={{"listStyleType": "none"}}>
-      //     <li>SEE BELOW</li>
-      //     <div className="display">DISPLAY COMPONENT</div>
-      //     {/* <li>{this.state.books}</li> */}
-      //     <li>{this.state.title }</li>
-      //     <li>{this.state.author }</li>
-      //     <li>{this.state.description }</li>
-      //   {this.state.books.map(book => (
-      //   <div key={book._id}>
-      //   <p>{book.title}</p>
-      //   {/* <p key={book.authors}>{book.authors}</p>
-      //   <p key={book.description}>{book.description}</p> */}
-      //   </div>
-      //   ))}
-      //           <li>SEE ABOVE</li>
-      // </ul>
+      <React.Fragment>
+    <h4>Saved Books</h4>
+      <div className="container-fluid">  
+        <p>Title:  {this.state.title }</p>
+        <p>Author(s): {this.state.authors }</p>
+        <p>Synopsis: {this.state.description }</p>
+        <p> 
+           <img alt="book image" src={this.state.image}></img>
+        </p>
+      <p>
+      <button  className="btn btn-lg btn-success float-right" onClick={this.saveBook}>Save</button> 
+      <button onClick={this.handleSearch} className="btn btn-lg btn-info float-right">
+          View
+      </button>
+      </p>
+    </div>
+    </React.Fragment>
   
       );
 
